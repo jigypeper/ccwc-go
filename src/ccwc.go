@@ -6,14 +6,12 @@ import (
 )
 
 type Count struct {
-	byte, chars, words, lines int
+	bytes, chars, words, lines int // Changed the field name from 'byte' to 'bytes'
 }
 
-func (c Count) get_stats(s string) Count {
-	c.byte = len(s)
+func (c *Count) GetStats(s string) { // Changed to pointer receiver and idiomatic method name
+	c.bytes = len(s)
 	c.chars = utf8.RuneCountInString(s)
 	c.words = len(strings.Fields(s))
 	c.lines = len(strings.Split(s, "\n"))
-
-	return c
 }
